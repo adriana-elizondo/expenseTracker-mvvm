@@ -1,16 +1,79 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewExpenseViewController" customModule="ExpenseTracker" customModuleProvider="target">
+            <connections>
+                <outlet property="categoryTextField" destination="N8Y-cR-ffD" id="eI7-wo-XC4"/>
+                <outlet property="descriptionLabel" destination="pUm-dX-oNl" id="hsw-Tj-6mi"/>
+                <outlet property="priceLabel" destination="CmY-HU-DS2" id="voV-8A-AUa"/>
+                <outlet property="titleLabel" destination="ydm-Wt-qQY" id="hkh-GZ-GGJ"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydm-Wt-qQY">
+                    <rect key="frame" x="20" y="50" width="335" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pUm-dX-oNl">
+                    <rect key="frame" x="20" y="95" width="335" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pirce" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CmY-HU-DS2">
+                    <rect key="frame" x="20" y="140" width="335" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2k-Ab-REF">
+                    <rect key="frame" x="20" y="255" width="335" height="30"/>
+                    <color key="backgroundColor" red="0.33333333329999998" green="0.68235294120000001" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Save">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="saveExpense:" destination="-1" eventType="touchUpInside" id="aur-tX-xQp"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N8Y-cR-ffD">
+                    <rect key="frame" x="20" y="185" width="335" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.23137254900000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="N8Y-cR-ffD" firstAttribute="top" secondItem="CmY-HU-DS2" secondAttribute="bottom" constant="15" id="0Lk-6Q-CBN"/>
+                <constraint firstItem="ydm-Wt-qQY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="2HD-6G-pq3"/>
+                <constraint firstItem="g2k-Ab-REF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="4uU-0d-9sQ"/>
+                <constraint firstAttribute="trailing" secondItem="pUm-dX-oNl" secondAttribute="trailing" constant="20" id="F0p-h1-ub1"/>
+                <constraint firstItem="g2k-Ab-REF" firstAttribute="top" secondItem="N8Y-cR-ffD" secondAttribute="bottom" constant="40" id="GB4-4U-Aya"/>
+                <constraint firstAttribute="trailing" secondItem="ydm-Wt-qQY" secondAttribute="trailing" constant="20" id="K8U-aA-V0E"/>
+                <constraint firstItem="pUm-dX-oNl" firstAttribute="top" secondItem="ydm-Wt-qQY" secondAttribute="bottom" constant="15" id="L9k-Yy-6vV"/>
+                <constraint firstItem="pUm-dX-oNl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="WAw-ej-R9Y"/>
+                <constraint firstItem="CmY-HU-DS2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Zh7-KO-9HC"/>
+                <constraint firstItem="CmY-HU-DS2" firstAttribute="top" secondItem="pUm-dX-oNl" secondAttribute="bottom" constant="15" id="akE-aj-sSE"/>
+                <constraint firstItem="N8Y-cR-ffD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="blr-m6-2OT"/>
+                <constraint firstAttribute="trailing" secondItem="N8Y-cR-ffD" secondAttribute="trailing" constant="20" id="cyG-U2-vZo"/>
+                <constraint firstItem="ydm-Wt-qQY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="uxY-w7-RpY"/>
+                <constraint firstAttribute="trailing" secondItem="g2k-Ab-REF" secondAttribute="trailing" constant="20" id="vcX-b3-daV"/>
+                <constraint firstAttribute="trailing" secondItem="CmY-HU-DS2" secondAttribute="trailing" constant="20" id="yf1-rC-4xF"/>
+            </constraints>
         </view>
     </objects>
 </document>

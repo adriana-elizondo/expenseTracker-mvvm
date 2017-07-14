@@ -9,28 +9,31 @@
 import Foundation
 import UIKit
 
-typealias DetailListComposed = ListModel & ExpenseListProtocol
 
-protocol ExpenseProtocol {
-    func title() -> String
-    func price() -> Double
+protocol Model {
+    var title : String {get set}
 }
 
-func +(left: ExpenseProtocol, right: ExpenseProtocol) -> Double {
-    return left.price() + right.price()
+func +(left: DetailModel, right: DetailModel) -> CGFloat {
+    return left.price + right.price
 }
 
-protocol ListModel {    
-    func all() -> [ExpenseProtocol]
-    func element(at index: Int) -> ExpenseProtocol?
-}
-
-protocol ExpenseListProtocol {
-    func percentage(for element : ExpenseProtocol) -> Double
-    func total() -> Double
-}
-
-protocol DetailModel : ExpenseProtocol {
+protocol DetailModel : Model {
+    var price : CGFloat {get set}
+    var modelDescription : String {get set}
     func image() -> UIImage?
-    func modelDescription() -> String
+}
+
+protocol ListModel {
+    associatedtype Element : Model
+    func all() -> [Element]
+    func element(at index: Int) -> Element?
+}
+
+protocol DetailListModel {
+    associatedtype Element : DetailModel
+    func all() -> [Element]
+    func element(at index: Int) -> Element?
+    func percentage(for element: Element) -> CGFloat
+    func total() -> CGFloat
 }

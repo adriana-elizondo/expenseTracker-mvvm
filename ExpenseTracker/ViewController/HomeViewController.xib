@@ -7,20 +7,48 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.16"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="ExpenseTracker" customModuleProvider="target">
+            <connections>
+                <outlet property="addNewElement" destination="60t-x4-awa" id="dH8-WG-Ldr"/>
+                <outlet property="testingLabel" destination="6a0-xr-Bzz" id="J7T-2P-0BN"/>
+                <outlet property="view" destination="F2i-ZE-0yc" id="BuV-rf-kQ3"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="hMv-xQ-gt3" customClass="HomeViewController" customModule="ExpenseTracker" customModuleProvider="target">
-            <layoutGuides>
-                <viewControllerLayoutGuide type="top" id="vfg-Jk-hJB"/>
-                <viewControllerLayoutGuide type="bottom" id="WTI-bF-XOr"/>
-            </layoutGuides>
-            <view key="view" contentMode="scaleToFill" id="Oto-Lc-FZY">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <color key="backgroundColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-            </view>
-            <point key="canvasLocation" x="127" y="-300"/>
-        </viewController>
+        <view contentMode="scaleToFill" id="F2i-ZE-0yc">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6a0-xr-Bzz">
+                    <rect key="frame" x="15" y="323.5" width="345" height="20"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60t-x4-awa">
+                    <rect key="frame" x="15" y="419" width="345" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="add:" destination="-1" eventType="touchUpInside" id="vtg-fZ-FT6"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.054901960780000002" green="0.26274509800000001" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="6a0-xr-Bzz" firstAttribute="leading" secondItem="F2i-ZE-0yc" secondAttribute="leading" constant="15" id="7T8-H3-gq0"/>
+                <constraint firstAttribute="trailing" secondItem="6a0-xr-Bzz" secondAttribute="trailing" constant="15" id="DIB-ie-OaL"/>
+                <constraint firstItem="6a0-xr-Bzz" firstAttribute="centerY" secondItem="F2i-ZE-0yc" secondAttribute="centerY" id="Mqk-6G-Vby"/>
+                <constraint firstItem="60t-x4-awa" firstAttribute="leading" secondItem="F2i-ZE-0yc" secondAttribute="leading" constant="15" id="gsT-1A-Op7"/>
+                <constraint firstAttribute="trailing" secondItem="60t-x4-awa" secondAttribute="trailing" constant="15" id="ho1-o3-PAO"/>
+                <constraint firstItem="60t-x4-awa" firstAttribute="top" secondItem="6a0-xr-Bzz" secondAttribute="bottom" constant="75.5" id="ozN-Tb-G1d"/>
+            </constraints>
+            <point key="canvasLocation" x="-182" y="-468"/>
+        </view>
     </objects>
 </document>
