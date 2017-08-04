@@ -10,16 +10,17 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class DetailViewModel<D: DetailModel>{
-    let model : D
+typealias DetailModelRealm = DetailModel & Object
+
+class DetailViewModel<D: DetailModelRealm>{
+    var model : D
     
     init(with model: D){
         self.model = model
     }
     
-    
-    func persist(){
-        
+    func persist() {
+        let persistingHelper = PersistingHelper<D>(with: model)
+        persistingHelper.update(with: {})
     }
-
 }

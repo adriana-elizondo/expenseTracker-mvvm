@@ -8,50 +8,37 @@
 
 import Foundation
 import RealmSwift
+import PieCharts
 
 class Expense: Object, DetailModel{
     @objc dynamic var title : String = ""
     @objc dynamic var price : CGFloat = 0.0
     @objc dynamic var modelDescription : String = ""
+    @objc dynamic var date : Date = Date()
     @objc dynamic var category : Category?
     
-    private var persistingHelper : PersistingHelper<Expense>?
-    
-    
-    func persist(){
-        persistingHelper = PersistingHelper<Expense>(with: self)
-        persistingHelper?.update()
+    convenience init(with title: String, price: String, modelDescription: String, category: Category){
+        self.init()
+        self.title = title
+        self.price = CGFloat((price as NSString).floatValue)
+        self.modelDescription = modelDescription
+        self.category = category
+        self.date = Date()
     }
-    
-    func image() -> UIImage? {
-        return nil
-    }
-
 }
 
 class ExpenseList : DetailListModel {
     typealias Element = Expense
     
-    let allElements = Array(realm.objects(Expense.self))
-    
     func all() -> [Element] {
-        return allElements
+        return Array(realm.objects(Expense.self))
     }
-
+    
     func element(at index: Int) -> Expense? {
+        let allElements = Array(realm.objects(Expense.self))
         guard allElements.count > index else {return nil}
         return allElements[index]
     }
-    
-    func percentage(for element: Expense) -> CGFloat {
-        return 0
-    }
-    
-    
-    func total() -> CGFloat {
-        return 0
-    }
-
 }
 
 

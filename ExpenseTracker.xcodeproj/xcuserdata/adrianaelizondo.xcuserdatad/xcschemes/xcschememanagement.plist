@@ -7,7 +7,20 @@
 		<key>ExpenseTracker.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2601D5F61F0DDDD500039421</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2601D60A1F0DDDD500039421</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

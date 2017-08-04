@@ -8,42 +8,70 @@
 
 import Foundation
 import UIKit
+import PieCharts
 
 class HomeViewController : UIViewController{
-    @IBOutlet weak var testingLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!{
+        didSet{
+            let dateFortmatter = DateFormatter()
+            dateFortmatter.dateStyle = .medium
+            dateLabel.text = dateFortmatter.string(from: Date())
+        }
+    }
+    
     @IBOutlet weak var addNewElement: UIButton!
+    @IBOutlet weak var pieChart: PieChart!
     
+    private var viewModel : HomeViewModel?
     
-    private var viewModel : ListDetailViewModel<ExpenseList>?
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    convenience init(viewModel: HomeViewModel){
+        self.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard viewModel?.all() != nil else {
-            self.testingLabel.text = "No elements found"
-            return
+        bindToViewModel()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        pieChart.delegate = self
+        pieChart.models = (self.viewModel?.mappedModels(with: { (expense) -> PieSliceModel in
+            PieSliceModel(value: Double((self.viewModel?.percentage(for: expense))!), color: UIColor.randomColor())
+        }))!
+    }
+    
+    //MARK: - ViewModel
+    private func bindToViewModel() {
+        self.viewModel?.didUpdate = { [weak self] _ in
+            self?.viewModelDidUpdate()
         }
+        self.viewModel?.didError = { [weak self] error in
+            self?.viewModelDidError(error: error)
+        }
+    }
+    
+    func viewModelDidUpdate(){
         
-        self.testingLabel.text = "\(String(describing: viewModel?.all().count)) elements"
-    
     }
     
-    func setModel(model: ListDetailViewModel<ExpenseList>){
-        self.viewModel = model
+    func viewModelDidError(error: Error){
+        
     }
     
-    //PRAGMA MARK: Actions
+    //MARK: Actions
     @IBAction func add(_ sender: Any) {
-        
+        viewModel?.addNew!()
     }
     
+}
+
+extension HomeViewController : PieChartDelegate {
+    func onSelected(slice: PieSlice, selected: Bool) {
+        
+    }
 }
 
 

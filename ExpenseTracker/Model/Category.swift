@@ -10,34 +10,37 @@ import Foundation
 import RealmSwift
 import Realm
 
-class Category : Object, Model {
+class Category : Object, DetailModel {
     @objc dynamic var title: String = ""
-    private var persistHelper : PersistingHelper<Category>?
+    @objc dynamic var price: CGFloat = 0
+    @objc dynamic var modelDescription: String = ""
     
-    required init() {
-        super.init()
-        persistHelper = PersistingHelper<Category>(with: self)
-    }
-    
-    required init(realm: RLMRealm, schema: RLMObjectSchema) {
-        fatalError("init(realm:schema:) has not been implemented")
-    }
-    
-    required init(value: Any, schema: RLMSchema) {
-        fatalError("init(value:schema:) has not been implemented")
-    }
-    
-    func allCategories() -> [Category]{
-        return persistHelper!.allObjects()
+    convenience init(with title: String){
+        self.init()
+        self.title = title
     }
 }
 
-class CategoryList : ListModel {
+class CategoryList : DetailListModel {
     typealias Element = Category
     
-    let allElements = Array(realm.objects(Category.self))
+    var allElements = Array(realm.objects(Category.self))
+    
+    private func initialCategories() -> [Category]{
+        return [Category(with: "Drinks"),
+                Category(with: "Food"),
+                Category(with: "Clothes"),
+                Category(with: "Cigarettes"),
+                Category(with: "Coffee"),
+        ]
+    }
     
     func all() -> [Element] {
+        if allElements.count == 0 {
+            let persistingHelper = PersistingHelper<Category>(with: Category())
+            persistingHelper.add(objects: initialCategories())
+        }
+        
         return allElements
     }
     

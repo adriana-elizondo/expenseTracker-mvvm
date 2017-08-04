@@ -8,11 +8,11 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class NewExpenseViewController : UIViewController{
-    private var categoryViewModel : ListViewModel<CategoryList>?
-    private var viewModel : DetailViewModel<Expense>?
-    private var model : Expense?
+    private var categoryViewModel : CategoryViewModel?
+    private var viewModel : NewExpenseViewModel?
     
     @IBOutlet private weak var titleLabel: UITextField!
     @IBOutlet private weak var descriptionLabel: UITextField!
@@ -22,33 +22,35 @@ class NewExpenseViewController : UIViewController{
     @IBOutlet weak var categoryTextField: UITextField!
     
     
-    convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, categoryViewModel: ListViewModel<CategoryList>) {
-        self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    convenience init(viewModel: NewExpenseViewModel, categoryViewModel: CategoryViewModel){
+        self.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
         self.categoryViewModel = categoryViewModel
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpUI()
     }
     
     private func setUpUI(){
         pickerView.delegate = self
         pickerView.dataSource = self
+        
+        categoryTextField.inputView = pickerView
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dissmissKeyboard(){
+        self.view.endEditing(true)
     }
     
     @IBAction private func saveExpense(_ sender: Any) {
-        model = Expense()
-        model?.title = titleLabel.text ?? ""
-        model?.modelDescription = descriptionLabel.text ?? ""
-        
-        viewModel = DetailViewModel(with: model!)
-        viewModel?.persist()
+        viewModel?.model = Expense(with: self.titleLabel.text!, price: self.priceLabel.text!, modelDescription: self.descriptionLabel.text!, category: Category(with: self.categoryTextField.text!))
+        viewModel?.saveExpense()
     }
-    
 }
 
 extension NewExpenseViewController : UIPickerViewDataSource, UIPickerViewDelegate{
@@ -67,8 +69,9 @@ extension NewExpenseViewController : UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
+        categoryTextField.text = categoryViewModel?.element(at: row)?.title
     }
 
 }
+
 

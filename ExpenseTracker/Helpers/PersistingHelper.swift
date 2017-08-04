@@ -21,9 +21,17 @@ class PersistingHelper <O: Object>{
         return Array(realm.objects(O.self))
     }
     
-    func update(){
+    func update(with completion: @escaping ()->Void){
         try! realm.write {
             realm.add(realmObject)
+        }
+        
+        completion()
+    }
+    
+    func add(objects: [O]){
+        try! realm.write {
+            realm.add(objects)
         }
     }
 }
